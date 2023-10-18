@@ -1,0 +1,134 @@
+---
+title: "Week-9: Code-along"
+author: "Sie Choon Hong"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+  df_print: paged
+pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tidy vs Non-Tidy (Slide #8)
+
+```{r, eval=TRUE,echo=TRUE}
+# install.packages("tidyverse")
+library(tidyverse)
+
+tidydata <- tribble(~country, ~year, ~cases, ~population,
+"Afghanistan", 1999, 745, 19987071,
+"Afghanistan", 2000, 2666, 20595360,
+"Brazil", 1999, 37737, 172006362,
+"Brazil", 2000, 80488, 174504898,
+"China", 1999, 212258, 1272915272,
+"China", 2000, 213766, 1280428583)
+
+tidydata
+
+nontidydata <- tribble(~country,~year,~rate,
+"Afghanistan", 1999, "745/19987071",
+"Afghanistan", 2000, "2666/20595360",
+"Brazil", 1999, "37737/172006362",
+"Brazil", 2000, "80488/174504898",
+"China", 1999, "212258/1272915272",
+"China", 2000, "213766/1280428583")
+
+nontidydata
+```
+<br>
+
+# Tidy-ing data: Example-1 (Slide #11)
+
+```{r, eval=TRUE,echo=TRUE}
+tidieddata <- nontidydata %>%
+  separate(rate, into = c("cases",
+                          "population"),
+           sep = "/")
+tidieddata
+```
+<br>
+
+# Tidy-ing data: Example-1 (Slide #12)
+
+```{r, eval=TRUE,echo=TRUE}
+newtidieddata <- tidieddata %>%
+  pivot_longer(cols = cases:population,
+               names_to = "measurement",
+               values_to = "value")
+newtidieddata
+```
+<br>
+
+# Tidy-ing data: Example-2 (Slide #14)
+
+```{r, eval=TRUE,echo=TRUE}
+df <- tribble(~ id, ~ bp1, ~ bp2,
+              "A", 100, 120,
+              "B", 140, 115,
+              "C", 120, 125)
+df
+
+df %>% pivot_longer(cols = bp1:bp2,
+               names_to = "measurement",
+               values_to = "value")
+```
+<br>
+
+# Reshaping data: Example-3 (Slide #18)
+
+```{r, eval=TRUE,echo=TRUE}
+newtidieddata %>%
+  pivot_wider(names_from = "measurement",
+              values_from = "value")
+```
+<br>
+
+# Reshaping data: Example-4 (Slide #19)
+
+```{r, eval=TRUE,echo=TRUE}
+df <- tribble(~id, ~measurement, ~value,
+"A", "bp1", 100,
+"B", "bp1", 140,
+"B", "bp2", 115,
+"A", "bp2", 120,
+"A", "bp3", 105)
+df
+
+df %>%
+  pivot_wider(names_from = measurement,
+              values_from = value)
+```
+
+<br>
+
+# Challenge
+
+
+```{r, eval=TRUE,echo=TRUE}
+
+library(tidyverse)
+
+my_data <- billboard %>% pivot_longer(cols = starts_with("wk"),
+names_to = "week",
+values_to = "rank", 
+values_drop_na = TRUE) %>% 
+mutate(week = parse_number(week))
+
+my_data
+
+ggplot(my_data, aes(x = week, y = rank)) + 
+geom_line() + labs(x = "week", y = "rank")
+```
+```{r, eval=TRUE,echo=TRUE}
+
+library(tidyverse)
+
+result <- cms_patient_experience %>% pivot_wider(names_from = "measure_cd",
+values_from = "prf_rate",  
+id_cols = starts_with("org"))
+
+result
+```

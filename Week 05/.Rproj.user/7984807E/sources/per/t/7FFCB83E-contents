@@ -1,0 +1,601 @@
+---
+title: "Notes Compilation of Code-along"
+author: "Sie Choon Hong"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+---
+
+# Shortcuts in RStudio
+Collapse - Alt + L 
+Expand - Shift + Alt + L
+Pipeline %>% - Shift + Crtl + M
+Shortcuts * Quick Reference - Alt + Shift + K
+Delete Line - Ctrl + D
+Reformat Code - Ctrl + Shift + A
+Comment/Uncomment - Ctrl + Shift + C
+Assignment - Alt + -
+Run Code Chunk - Crlt + Shift + Enter
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Week 1: Code-along 
+What does “Knit” do?
+It runs all the code in the raw file, stitches the output of all code with the text in the raw file and creates an R Markdown document. Since you had chosen “HTML” as output format, it will create an HTML file, i.e. a regular webpage showing the result of all the code in the raw file.
+
+
+# Week 2: Code-along 
+What are packages?
+Packages are collections of functions, data, and compiled code in a well-defined format, created to add specific functionality. There are 10,000+ user contributed packages and growing.
+
+There are a set of standard (or base) packages which are considered part of the source code and automatically available as part of your installation. Base packages contain the basic functions that allow to work, and enable standard statistical and graphical functions on datasets.
+
+# Week 3: Code-along
+## Variables and Data Types
+```{r Loading of Packging, eval=TRUE, echo=TRUE, warning=FALSE}
+library("tidyverse")
+```
+```{r Assigning values to variables, warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+a <- 'A'
+b <- "Apple"
+c <- FALSE 
+d <- 5L
+e <- 5
+f <- 1i
+```
+```{r Checking the type of variables, eval=TRUE, echo=TRUE, message=FALSE, warning=TRUE}
+typeof(a)
+typeof(b)
+typeof(c)
+typeof(d)
+typeof(e)
+typeof(f)
+```
+```{r Need for data types,warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+# import the cat-lovers data from the csv file ----
+cat_lovers <- read_csv("cat-lovers.csv")
+
+# Compute the mean of the number of cats: execute this command ----
+mean(cat_lovers$number_of_cats)
+
+# Get more information about the mean() command using ? operator ----
+?mean
+
+# Convert the variable number_of_cats using as.integer() ----
+mean(as.integer(cat_lovers$number_of_cats))
+
+# Display the elements of the column number_of_cats ----
+cat_lovers$number_of_cats
+
+# Display the elements of the column number_of_cats after converting it using as.numeric() ----
+as.numeric(cat_lovers$number_of_cats)
+```
+## Data Structures
+```{r Create an empty vector, warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+# Empty vector ----
+x <- vector()
+
+# Type of the empty vector ----
+typeof(x)
+```
+```{r Ways to create vectors of type logical, warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+# Method 1 ----
+x<-vector("logical",length=5)
+x
+typeof(x)
+
+# Method 2 ----
+x<-logical(5)
+x
+typeof(x)
+
+# Method 3 ----
+x<-c(TRUE,FALSE,TRUE,FALSE,TRUE)
+x
+typeof(x)
+```
+
+```{r Ways to create vectors of type character, warning=TRUE, message=FALSE, eval=TRUE,echo=TRUE}
+# Method 1 ----
+x <- vector("character",length = 5)
+x
+typeof(x)
+
+# Method 2 ----
+x <- character(5)
+x
+typeof(x)
+
+# Method 3 ----
+x <- c('A','b','r','q')
+x
+typeof(x)
+```
+
+```{r Ways to create vectors of type integer, warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+# Method 1 ----
+x <- vector("integer",length = 5)
+x
+typeof(x)
+
+# Method 2 ----
+x <- integer(5)
+x
+typeof(x)
+
+# Method 3 ----
+x <- c(1,2,3,4,5)
+x
+typeof(x)
+
+# Method 4 ----
+x <- seq(from=1, to = 5, by = 0.1)
+x
+typeof(x)
+
+# Method 5 ----
+x <- 1:5 
+x
+typeof(x)
+```
+
+```{r Ways to create vectors of type double, warning=TRUE, message=FALSE, eval=TRUE, echo=TRUE}
+# Method 1 ----
+x <- vector("double", length = 5)
+x
+typeof(x)
+
+# Method 2 ----
+x <- double(5)
+x
+typeof(x)
+
+# Method 3 ----
+x <- c(1.787, 0.63573, 2.3890)
+x
+typeof(x)
+```
+
+```{r Implicit coercion,warning=TRUE,message=TRUE,eval=TRUE,echo=TRUE}
+# When converts the type based on its contents it is called, implicit coercion
+# Example 1: Automatic conversion of types by from double to character ----
+# Create a vector
+x <- (1.8)
+typeof(x)
+x
+
+# Add a character to the vector
+x <- c(x, 'a')
+typeof(x)
+x
+
+nrow(1) 
+
+# Example 2: Automatic conversion of types by from logical to double ----
+# Create a vector
+x <- c(TRUE)
+typeof(x)
+x
+
+# Add a number to the vector
+x <- c(x,2)
+typeof(x)
+x
+
+nrow(1) 
+
+# Example 3: Automatic conversion of types by from character to character ----
+# Create a vector 
+x <- c('a')
+typeof(x)
+x
+
+# Add a logical value to the vector
+x <- c(x,TRUE)
+typeof(x)
+x
+
+nrow(1) 
+
+# Example 4 Automatic conversion of types by from integer to double ----
+# Create a vector
+x <- c(1L)
+typeof(x)
+x
+
+# Add a number to the vector
+x <- c(x,2)
+typeof(x)
+x
+```
+
+```{r Explicit coercion, warning=TRUE, message=TRUE, eval=TRUE, echo=TRUE}
+# Forcing conversion manually is called, explicit coercion
+# Example 1: Explicit coercion from integer to character ----
+# Create a vector
+x <- c(1L)
+typeof(x)
+x
+
+# Convert the vector to type character
+x <- as.character(x)
+typeof(x)
+x
+
+nrow(1)
+
+# Example 2: Explicit coercion from character to double ----
+# Create a vector
+x <- c('A')
+typeof(x)
+x
+
+# Convert the vector to type double
+x <- as.numeric(x)
+typeof(x)
+x
+```
+
+
+```{r Accessing elements of the vector, warning=TRUE, message=TRUE, eval=TRUE, echo=TRUE}
+# Create a vector
+x <- c(1,10,9,8,1,3,5)
+
+# Access 1 element with index 3 ----
+x[3]
+
+# Access elements with consecutive indices, 2 to 4: 2,3,4 ----
+x[2:4]
+
+# Access elements with non-consecutive indices, 1,3,5 ----
+x[c(1,3,5)]
+
+# Access elements using logical vector ----
+x[c(TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE)]
+
+# Access elements using the conditional operator < ----
+x[x < 10]
+```
+
+```{r Examining vectors, warning=TRUE, message=TRUE, eval=TRUE, echo=TRUE}
+# Display the length of the vector ----
+print(length(x))
+
+# Display the type of the vector ----
+print(typeof(x))
+
+# Display the structure of the vector ----
+print(str(x))
+```
+
+```{r Lists, warning=TRUE, message=TRUE, eval=TRUE, echo=TRUE}
+# Initialise a named list ----
+my_pie = list(type="key lime", diameter=7, is.vegetarian=TRUE)
+my_pie
+
+nrow(1)
+
+# Print the names of the list ----
+names(my_pie)
+
+nrow(1)
+
+# Retrieve the element named type ----
+my_pie$type
+
+nrow(1)
+
+# Retrieve a truncated list ----
+my_pie["type"]
+
+nrow(1)
+
+# Retrieve the element named type ----
+my_pie[["type"]]
+```
+
+```{r Exploring data-sets, warning=TRUE, message=TRUE, eval=TRUE, echo=TRUE}
+# Install package 
+# install.packages("openintro", repos ="http://cran.us.r-project.org")
+
+# Load the package 
+library(openintro)
+library(tidyverse)
+
+# Catch a glimpse of the data-set: see how the rows are stacked one below another ----
+# glimpse(loans_full_schema)
+
+# Selecting numeric variables ----
+loans <- loans_full_schema %>%
+  select(paid_total,
+         term,
+         interest_rate,
+         annual_income,
+         paid_late_fees,
+         debt_to_income)
+
+# View the columns stacked one below another
+glimpse(loans)
+
+# Selecting categoric variables ----
+loans <- loans_full_schema %>%
+  select(grade, state, homeownership, disbursement_method)
+
+# View the columns stacked one below another
+glimpse(loans)
+```
+# Week 4: Code-along
+## Data Wrangling
+```{r Data Wrangling, eval=TRUE, echo=TRUE, warning=FALSE}
+# Load package tidyverse
+library("tidyverse")
+
+# Read data from the hotels.csv file and assign it to a variable named, "hotels"
+hotels <- read_csv("hotels.csv")
+
+# List names of the variables in the data-set (Slide #19)
+names(hotels)
+
+# Glimpse of contents of the data-set (Slide #20) 
+glimpse(hotels)
+```
+
+## Choosing rows or columns
+```{r Select a single column (Slide #24 & #25), eval=TRUE,echo=TRUE}
+# Select single columns
+select(hotels, lead_time)
+
+# Select multiple columns
+select(hotels, lead_time,agent,market_segment)
+```
+```{r Arrange entries of a column (Slide #30 & #31), eval=TRUE,echo=TRUE}
+# Arrange entries of a column (Slide #28) ----
+arrange(hotels, lead_time)
+
+# Arrange entries of a column in the descending order (Slide #30) ----
+arrange(hotels, desc(lead_time))
+
+# Select columns and arrange the entries of a column (Slide #31) ----
+```
+```{r Select and arrange the entries of a column using the pipe operator (Slide #37), eval=TRUE,echo=TRUE}
+arrange(select(hotels, lead_time), desc(lead_time))
+```
+```{r Using Pipeline, eval=TRUE,echo=TRUE}
+view(hotels)
+# Select columns and arrange the entries of a column using the pipe operator (Slide #37) ----
+hotels %>%
+  select(lead_time) %>%
+  arrange(desc(lead_time)) # can also use arrange(-lead-time) to desc
+
+# Pick rows matching a condition (Slide #44) ----
+hotels %>%
+  filter(children >= 1) %>%
+  select(hotel, children)
+
+# Pick rows matching multiple conditions (Slide #46) ---- 
+hotels %>%
+  filter(children >= 1, hotel == "City Hotel") %>%
+  select(hotel, children)
+
+# Non-conditional selection of rows: sequence of indices (Slide #49) 
+hotels %>% slice(1:5)
+
+# Non-conditional selection of rows: non-consecutive/specific indices (Slide #50) ----
+hotels %>% 
+  slice(1,3,5) # Slice 1 refers to the first record of the data
+
+# Pick unique rows using distinct() (Slide #52) ----
+hotels %>% distinct(hotel)
+```
+
+## Creating new columns
+```{r Creating new columns, eval=TRUE,echo=TRUE}
+## Creating a single column with mutate() (Slide #56) ----
+hotels %>%
+  mutate(little_ones = children + babies) %>%
+  select(hotel, little_ones,children,babies)
+
+# Creating multiple columns with mutate() (Slide #58) ---- 
+hotels %>%
+  mutate(little_ones = children + babies,
+  average_little_ones = mean(little_ones)) %>%
+  select(hotel, little_ones,children,babies, average_little_ones)
+```
+## More operations with examples
+```{r More operations with examples count(), eval=TRUE,echo=TRUE}
+# count() to get frequencies (Slide #60) ----
+hotels %>%
+  count(market_segment)
+
+# count() to get frequencies with sorting of count (Slide #61) ----
+hotels %>%
+  count(market_segment, sort = TRUE)
+
+# count() multiple variables (Slide #62) ----
+hotels %>%
+  count(hotel, market_segment)
+```
+```{r More operations with examples sumarise(), eval=TRUE,echo=TRUE}
+# summarise() for summary statistics (Slide #63) ----
+hotels %>%
+  summarise(mean_adr = mean(adr))
+
+# summarise() by using group_by to find mean (Slide #64) ----
+hotels %>%
+  group_by(hotel) %>%
+  summarise(mean_adr = mean(adr))
+
+# summarise() by using group_by to get count (Slide #65) ----
+hotels %>%
+  group_by(hotel) %>%
+  summarise(count = n())
+
+# summarise() for multiple summary statistics (Slide #67) ----
+hotels %>%
+  summarise(
+  min_adr = min(adr),
+  mean_adr = mean(adr),
+  median_adr = median(adr),
+  max_adr = max(adr)
+)
+
+# select(), slice() and arrange() (Slide #68) ----
+hotels %>%
+  select(hotel, lead_time) %>%
+    slice(1:5) %>%
+      arrange(lead_time)
+
+# select(), arrange() and slice() (Slide #69) ----
+hotels %>%
+  select(hotel, lead_time) %>%
+  arrange(lead_time) %>%
+  slice(1:5)
+# filter() to select rows based on conditions (Slide #73) ----
+hotels %>%
+  filter(adults == 0,children >= 1) %>%
+  select(adults, babies, children)
+
+# filter() to select rows based on complicated conditions (Slide #74) ----
+hotels %>% 
+  filter(adults == 1,children >= 1 | babies >=1) %>% 
+  select(adults, babies, children)
+
+# count() and arrange() (Slide #76) ----
+hotels %>% 
+  count(market_segment) %>% 
+  arrange(desc(n))
+
+# mutate(), select() and arrange() (Slide #77) ---- 
+hotels %>% 
+  mutate(little_ones = children + babies) %>%
+  select(children, babies, little_ones) %>%
+  arrange(desc(little_ones))
+
+# mutate(), filter() and select() (Slide #78) ----
+hotels %>% 
+  mutate(little_ones = children + babies) %>%
+  filter(little_ones >= 1,hotel == "City Hotel") %>%
+  select(hotel, little_ones)
+```
+# Week 5: Code-along
+## Writing a function
+```{r Functions, eval=TRUE,echo=TRUE}
+# 1. Write a function to print a "Hello" message (Slide #14) ----
+say_hello_to <- function(name) {
+  print(paste0("Hello ", name,"!"))
+}
+
+# 2. Function call with different input names (Slide #15) ----
+say_hello_to('Kashif')
+say_hello_to('Zach')
+say_hello_to('Deniz')
+
+# 3. typeof primitive functions (Slide #16) ----
+typeof(`+`)
+typeof(sum)
+
+# 4. typeof user-defined functions (Slide #17) ----
+typeof(say_hello_to)
+typeof(mean)
+```
+
+
+```{r Function to calculate mean of a sample, eval=TRUE,echo=TRUE}
+### 5. Function to calculate mean of a sample (Slide #19) ----
+calc_sample_mean <- function(sample_size) {
+  mean(rnorm(sample_size))
+}
+
+# 6. Test your function (Slide #22) ----
+# With one input ----
+calc_sample_mean(1000)
+
+# With vector input ----
+calc_sample_mean(c(100,300,3000))
+```
+
+```{r Function Customization, eval=TRUE,echo=TRUE}
+# 7. Customizing the function to suit input (Slide #23) ----
+library(tidyverse)
+
+#creating a vector to test our function ----
+sample_tibble <- tibble(sample_sizes = c(100,300,3000))
+
+#using rowwise groups the data by row, # allowing calc_sample_mean ----
+sample_tibble %>%
+  group_by(sample_sizes) %>%
+  mutate(sample_means = calc_sample_mean(sample_sizes))
+```
+```{r Setting defaults, eval=TRUE,echo=TRUE}
+# 8. Setting defaults (Slide #25) ----
+# First define the function
+calc_sample_mean <- function(sample_size,our_mean = 0,our_sd = 1) {
+  sample <- rnorm(sample_size,
+  mean = our_mean,
+  sd = our_sd)
+  mean(sample)
+}
+# Call the function 
+calc_sample_mean(sample_size = 10)
+```
+
+### 9. Different input combinations (Slide #26)
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here 
+calc_sample_mean(10, our_sd = 2)
+calc_sample_mean(10, our_mean = 6)
+calc_sample_mean(10,6,2)
+```
+
+### 10. Different input combinations (Slide #27)
+
+```{r, eval=TRUE,echo=TRUE,error=TRUE} 
+# set error=TRUE to see the error message in the output
+# Enter code here 
+calc_sample_mean(our_mean = 5)
+```
+
+
+
+```{r, eval=TRUE,echo=TRUE,error=FALSE} 
+
+# Enter code here 
+add_two <- function(x) {
+  x+2
+}
+add_two(4)
+add_two(-34)
+add_two(5.784)
+```
+## B. Scoping
+
+### 12. Multiple assignment of z (Slide #36)
+
+```{r, eval=TRUE,echo=TRUE}
+z <- 1
+sprintf("The value assigned to z outside the function is %d",z)
+
+# declare a function, notice how we pass a value of 2 for z
+foo <- function(z = 2) {
+  # reassigning z 
+  z <- 3 
+  return(z+3)
+}
+foo()
+```
+
+### 13. Multiple assignment of z (Slide #37)
+
+```{r, eval=TRUE,echo=TRUE}
+z <- 1
+# declare a function, notice how we pass a value of 2 for z
+foo <- function(z =2) {
+  # reassigning z
+  z <- 3
+  return(z+3)
+}
+# another reassignment of z
+foo(z = 4)
+```

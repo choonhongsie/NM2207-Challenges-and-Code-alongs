@@ -1,0 +1,340 @@
+---
+pdf_document: default
+author: "Sie Choon Hong"
+date: "`r Sys.Date()`"
+output:
+  html_document: null
+  df_print: paged
+  pdf_document: default
+title: 'Week-4: Code-along'
+---
+
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# II. Code to edit and execute using the Code-along.Rmd file 
+<br>
+<div id="home">
+# Table of Content (Click the link below to scroll down to the specific content)
+</div>
+<a href="#q1">1. Loading packages (Slide #16)</a><br>
+<a href="#q2">2. Loading data-set (Slide #16)</a><br>
+<a href="#q3">3. List names of the variables in the data-set (Slide #19)</a><br>
+<a href="#q4">4. Glimpse of contents of the data-set (Slide #20)</a>
+<a href="#q5">5. Select a single column (Slide #24)
+</a><br>
+<a href="#q6">6. Select multiple columns (Slide #25)
+</a><br>
+<a href="#q7">7. Arrange entries of a column (Slide #28)
+</a><br>
+<a href="#q8">8. Arrange entries of a column in the descending order (Slide #30)</a><br>
+<a href="#q9">9. Select columns and arrange the entries of a column (Slide #31)</a><br>
+<a href="#q10">10. Select columns and arrange the entries of a column using the pipe operator (Slide #37)</a><br>
+<a href="#q11">11. Pick rows matching a condition (Slide #44)</a><br>
+<a href="#q12">12. Pick rows matching multiple conditions (Slide #46)
+</a><br>
+<a href="#q13">13. Non-conditional selection of rows: sequence of indices (Slide #49)</a><br>
+<a href="#q14">14. Non-conditional selection of rows: non-consecutive/specific indices (Slide #50)</a><br>
+<a href="#q15">15. Pick unique rows using distinct() (Slide #52)
+</a><br>
+<a href="#q16">16. Creating a single column with mutate() (Slide #56)
+</a><br>
+<a href="#q17">17. Creating multiple columns with mutate() (Slide #58)
+</a><br>
+<a href="#q18">18. count() to get frequencies (Slide #60)
+</a><br>
+<a href="#q19">19. count() to get frequencies with sorting of count (Slide #61)</a><br>
+<a href="#q20">20. count() multiple variables (Slide #62)</a><br>
+<a href="#q21">21. summarise() for summary statistics (Slide #63)</a><br>
+<a href="#q22">22. summarise() by using group_by to find mean (Slide #64)</a><br>
+<a href="#q23">23. summarise() by using group_by to get count (Slide #65)</a><br>
+<a href="#q24">24. summarise() for multiple summary statistics (Slide #67)</a><br>
+<a href="#q25">25. select(), slice() and arrange() (Slide #68)</a><br>
+<a href="#q26">26. select(), arrange() and slice() (Slide #69)</a><br>
+<a href="#q27">27. filter() to select rows based on conditions (Slide #73)</a><br>
+<a href="#q28">28. filter() to select rows based on complicated conditions (Slide #74)</a><br>
+<a href="#q29">29. count() and arrange() (Slide #76)</a><br>
+<a href="#q30">30. mutate(), select() and arrange() (Slide #77)</a><br>
+<a href="#q31">31. mutate(), filter() and select() (Slide #78)</a><br>
+
+<br>
+
+## A. Data Wrangling
+<br>
+<div id="q1">
+### 1. Loading packages (Slide #16) <a href=#home>Click Me to scroll to top</a>
+```{r, eval=TRUE,echo=TRUE}
+# Load package tidyverse
+library("tidyverse")
+```
+</div>
+<div id="q2">
+### 2. Loading data-set (Slide #16) <a href=#home>Click Me to scroll to top</a>
+```{r, eval=TRUE,echo=TRUE}
+# Read data from the hotels.csv file and assign it to a variable named, "hotels"
+hotels <- read_csv("hotels.csv")
+```
+</div>
+<div id="q3">
+### 3. List names of the variables in the data-set (Slide #19) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+names(hotels)
+```
+</div>
+<div id="q4">
+### 4. Glimpse of contents of the data-set (Slide #20) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+glimpse(hotels)
+```
+</div><br>
+
+## B. Choosing rows or columns
+<br>
+<div id="q5">
+### 5. Select a single column (Slide #24) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+select(hotels, lead_time)
+```
+</div><div id="q6">
+### 6. Select multiple columns (Slide #25) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+select(hotels, lead_time,agent,market_segment)
+```
+</div><div id="q7">
+### 7. Arrange entries of a column (Slide #28) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+arrange(hotels, lead_time)
+```
+</div><div id="q8">
+### 8. Arrange entries of a column in the descending order (Slide #30) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+arrange(hotels, desc(lead_time))
+```
+</div><div id="q9">
+### 9. Select columns and arrange the entries of a column (Slide #31) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+arrange(
+  select(hotels, lead_time), desc(lead_time)
+)
+```
+</div><div id="q10">
+### 10. Select columns and arrange the entries of a column using the pipe operator (Slide #37) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+select(lead_time) %>%
+arrange(desc(lead_time))
+```
+</div><div id="q11">
+### 11. Pick rows matching a condition (Slide #44) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  filter(children >= 1) %>% 
+    select(hotel, children)
+```
+</div><div id="q12">
+### 12. Pick rows matching multiple conditions (Slide #46) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  filter(children >= 1,hotel == "City Hotel") %>%
+    select(hotel, children)
+```
+</div><div id="q13">
+### 13. Non-conditional selection of rows: sequence of indices (Slide #49) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% slice(1:5)
+```
+</div><div id="q14">
+### 14. Non-conditional selection of rows: non-consecutive/specific indices (Slide #50) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  slice(1,3,5)
+```
+</div><div id="q15">
+### 15. Pick unique rows using distinct() (Slide #52) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% distinct(hotel)
+```
+</div><br>
+
+## C. Creating new columns
+<br>
+<div id="q16">
+### 16. Creating a single column with mutate() (Slide #56) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  mutate(little_ones = children + babies) %>%
+  select(hotel, little_ones,children,babies)
+```
+</div><div id="q17">
+### 17. Creating multiple columns with mutate() (Slide #58) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  mutate(little_ones = children + babies,
+  average_little_ones = mean(little_ones)) %>%
+  select(hotel, little_ones,children,babies, average_little_ones)
+```
+</div><br>
+
+## D. More operations with examples
+<br>
+<div id="q18">
+### 18. count() to get frequencies (Slide #60) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  count(market_segment)
+```
+</div><div id="q19">
+### 19. count() to get frequencies with sorting of count (Slide #61) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  count(market_segment, sort = TRUE)
+```
+</div><div id="q20">
+### 20. count() multiple variables (Slide #62) <a href=#home>scroll to top</a> <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  count(hotel, market_segment)
+```
+
+</div><div id="q21">
+### 21. summarise() for summary statistics (Slide #63) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  summarise(mean_adr = mean(adr))
+```
+</div><div id="q22">
+### 22. summarise() by using group_by to find mean (Slide #64)  <a href=#home>Click Me to scroll to top</a>
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  group_by(hotel) %>%
+  summarise(mean_adr = mean(adr))
+```
+</div><div id="q23">
+### 23. summarise() by using group_by to get count (Slide #65) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  group_by(hotel) %>%
+  summarise(count = n())
+```
+</div><div id="q24">
+### 24. summarise() for multiple summary statistics (Slide #67) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  summarise(
+  min_adr = min(adr),
+  mean_adr = mean(adr),
+  median_adr = median(adr),
+  max_adr = max(adr)
+)
+```
+</div><div id="q25">
+### 25. select(), slice() and arrange() (Slide #68) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  select(hotel, lead_time) %>%
+    slice(1:5) %>%
+      arrange(lead_time)
+```
+</div><div id="q26">
+### 26. select(), arrange() and slice() (Slide #69) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  select(hotel, lead_time) %>%
+  arrange(lead_time) %>%
+  slice(1:5)
+```
+</div><div id="q27">
+### 27. filter() to select rows based on conditions (Slide #73) <a href=#home>Click Me to scroll to top</a>
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>%
+  filter(adults == 0,children >= 1) %>%
+  select(adults, babies, children)
+```
+</div><div id="q28">
+### 28. filter() to select rows based on complicated conditions (Slide #74) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  filter(adults == 1,children >= 1 | babies >=1) %>% 
+  select(adults, babies, children)
+```
+</div><div id="q29">
+### 29. count() and arrange() (Slide #76) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  count(market_segment) %>% 
+  arrange(desc(n))
+```
+</div><div id="q30">
+### 30. mutate(), select() and arrange() (Slide #77) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  mutate(little_ones = children + babies) %>%
+  select(children, babies, little_ones) %>%
+  arrange(desc(little_ones))
+```
+</div><div id="q31">
+
+### 31. mutate(), filter() and select() (Slide #78) <a href=#home>Click Me to scroll to top</a>
+
+```{r, eval=TRUE,echo=TRUE}
+# Enter code here
+hotels %>% 
+  mutate(little_ones = children + babies) %>%
+  filter(little_ones >= 1,hotel == "City Hotel") %>%
+  select(hotel, little_ones)
+```
+</div>

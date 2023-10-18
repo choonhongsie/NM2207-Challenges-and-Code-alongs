@@ -1,0 +1,23 @@
+---
+title: "Week 08 Code along and Challenge 8"
+output: html_document
+date: "2023-10-09"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# RunExample("01_Hello")
+
+![](images/Screenshot%202023-10-09%20at%2020.20.16-01.png)
+
+# Combination of the Code along
+
+![](images/Screenshot%202023-10-09%20at%2020.22.06-01.png)
+
+# Challenge-8
+
+I have create 3 variables called num, let and date, which will be in a dataframe. I have also created an input slider. Under server section, I will call the variable of dataframe to generate a ggplot and placed under the main panel
+
+![](images/Screenshot 2023-10-09 at 20.36.52.png)Challenge-8
