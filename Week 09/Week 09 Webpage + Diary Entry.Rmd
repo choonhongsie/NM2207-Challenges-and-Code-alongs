@@ -1,0 +1,19 @@
+## Week 9: Diary Entry
+
+**1. What is the topic that you have finalized? (Answer in 1 or 2 sentences)**
+
+The topic that I have finalized is food waste in Singapore. I will discuss the extent of food waste in Singapore, its causes and impacts, and what can be done to reduce it.
+
+**2. What are the data sources that you have curated so far? (Answer in 1 or 2 sentences)**
+
+1.  [Average Food Waste Around the World, 2021](https://www.kaggle.com/datasets/joebeachcapital/food-waste/)
+
+2.  [Waste and Recycling Statistics from 2017 to 2021](https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf)
+
+3.  [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Link to Github: Challenges & Code-alongs:\
+<https://github.com/choonhongsie/NM2207-Challenges-and-Code-alongs.git>
+
+Webpage:\
+<https://choonhongsie.github.io>
