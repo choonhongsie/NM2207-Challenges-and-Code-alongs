@@ -1,0 +1,91 @@
+---
+---
+---
+
+## Week 9: Diary Entry
+
+**1. What is the topic that you have finalized? (Answer in 1 or 2 sentences)**
+
+The topic that I have finalized is food waste in Singapore. I will discuss the extent of food waste in Singapore, its causes and impacts, and what can be done to reduce it.
+
+**2. What are the data sources that you have curated so far? (Answer in 1 or 2 sentences)**
+
+1.  [Average Food Waste Around the World, 2021](https://www.kaggle.com/datasets/joebeachcapital/food-waste/)
+
+2.  [Waste and Recycling Statistics from 2003 to 2017](https://www.nea.gov.sg/docs/default-source/our-services/waste-management/wastestats-2003-20164197a3fd04d34770bafba09393d0fdf0.pdf)
+
+3.  [Waste and Recycling Statistics from 2017 to 2021](https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf)
+
+4.  [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Link to Github: Challenges & Code-alongs:\
+<https://github.com/choonhongsie/NM2207-Challenges-and-Code-alongs.git>
+
+Webpage:\
+<https://choonhongsie.github.io>
+
+## Week 10: Diary Entry
+
+**1. What is the question that you are going to answer? (Answer: One sentence that ends with a question mark that could act like the title of your data story)**
+
+What are the key drivers of food waste in Singapore and around the world?
+
+**2. Why is this an important question? (Answer: 3 sentences, each of which has some evidence, e.g., "According to the United Nations..." to justify why the question you have chosen is important)**
+
+Food waste is a major contributor to climate change, accounting for 8-10% of global greenhouse gas emissions. Reducing food waste is essential for mitigating climate change and protecting the environment. Source: [United Nations Environment Program (UNEP) (2021). *Food Waste Index Report 2021.*](https://www.unep.org/resources/report/unep-food-waste-index-report-2021#:~:text=Estimates%20suggest%20that%208%2D10,both%20people%20and%20the%20planet.)
+
+According to the National Environment Agency (NEA), Singapore generated 763,000 tonnes of food waste in 2022 and this accounted for 11% of total waste. This amount has increased steadily over the years, and it is expected to continue to grow as the population and economy expand. Source: [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Food waste is a serious problem in Singapore, as it affects food security and puts pressure on resources. This is especially concerning given that Singapore imports over 90% of its food supply and is a land-scarce country. Source: [towardszerowaste.gov.sg](https://www.towardszerowaste.gov.sg/foodwaste/#:~:text=When%20food%20is%20wasted%2C%20more,puts%20pressure%20on%20our%20resources.)
+
+**3. Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).**
+
+1.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++--------------+--------------------------------------------+
+| Row          | Column                                     |
++:=============+:===========================================+
+| 1 to 20      | 1.  Country                                |
+|              | 2.  combined figures (kg/capita/year)      |
+|              | 3.  Household estimate (kg/capita/year)    |
+|              | 4.  Household estimate (tonnes/year)       |
+|              | 5.  Retail estimate (kg/capita/year)       |
+|              | 6.  Retail estimate (tonnes/year)          |
+|              | 7.  Food service estimate (kg/capita/year) |                                         
+|              | 8.  Food service estimate (tonnes/year)    |
+|              | 9.  Region                                 |
++--------------+--------------------------------------------+
+
+2.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++--------------+-----------------------------------+
+| Row          | Column                            |
++:=============+:==================================+
+| 1 to 20      | 1.  Year                          |
+|              | 2.  Total Waste Recycled (tonne)  |
+|              | 3.  Total Waste Generated (tonne) |
+|              | 4.  Recycling Rate (%)            |
++--------------+-----------------------------------+
+
+**4. Include the challenges and errors that you faced and how you overcame them.**
+
+1.  Using the data sets obtain from United Nations Environment Programme (UNEP) from Kaggle, I have created a bar chart to show the top 5 countries including Singapore of the total Household Food Waste generated (tonnes per year). Initially, some of challenges I faced and I resolved it in a table below.
+
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Challenge Faced                                                                          | Solution                                                                                                              |
++:=========================================================================================+:======================================================================================================================+
+| How do I flipped the bar chart from vertical to horizontal?                              | Use `coord_flip()`                                                                                                    |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| The data value displayed extended outside the panel and I do not know how to resolve it. | Added `clip = "off"` to coordinate system of `coord_flip()` to ensure that the labels are not truncated by the panel. |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| How do I change the sharp-edged bars into rounded rectangles?                            | Installed a geom_chicklet package and changed from `geom_bar()` to `geom_chicklet( radius = grid::unit(2, 'mm')`      |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+
+2.  Another challenge I faced was to integrate shiny app into Quarto. I resolved it by creating doing the following:
+
+    1.  Installed the "r-shinylive" package from GitHub in R Console
+    2.  Opened my Quarto project using the terminal
+    3.  Installed the "shinylive" Quarto extension via the Terminal in the new RStudio Project.
+    4.  Created a new Quarto document of dashboard.qmd
+    5.  Modified the Quarto document of dashboard.qmd to utilize the "shinylive" filter.
+    6.  Switched the code cell type from \`{r}\` to \`{shinylive-r}\` to execute the Shiny app.
