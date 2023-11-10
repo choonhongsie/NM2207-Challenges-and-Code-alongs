@@ -1,0 +1,300 @@
+---
+---
+---
+
+## Week 9: Diary Entry
+
+**1. What is the topic that you have finalized? (Answer in 1 or 2 sentences)**
+
+The topic that I have finalized is food waste in Singapore. I will discuss the extent of food waste in Singapore, its causes and impacts, and what can be done to reduce it.
+
+**2. What are the data sources that you have curated so far? (Answer in 1 or 2 sentences)**
+
+1.  [Average Food Waste Around the World, 2021](https://www.kaggle.com/datasets/joebeachcapital/food-waste/)
+
+2.  [Waste and Recycling Statistics from 2003 to 2017](https://www.nea.gov.sg/docs/default-source/our-services/waste-management/wastestats-2003-20164197a3fd04d34770bafba09393d0fdf0.pdf)
+
+3.  [Waste and Recycling Statistics from 2017 to 2021](https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf)
+
+4.  [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Link to Github: Challenges & Code-alongs:\
+<https://github.com/choonhongsie/NM2207-Challenges-and-Code-alongs.git>
+
+Webpage:\
+<https://choonhongsie.github.io>
+
+## Week 10: Diary Entry
+
+**1. What is the question that you are going to answer? (Answer: One sentence that ends with a question mark that could act like the title of your data story)**
+
+What are the key drivers of food waste in Singapore and around the world?
+
+**2. Why is this an important question? (Answer: 3 sentences, each of which has some evidence, e.g., "According to the United Nations..." to justify why the question you have chosen is important)**
+
+Food waste is a major contributor to climate change, accounting for 8-10% of global greenhouse gas emissions. Reducing food waste is essential for mitigating climate change and protecting the environment. Source: [United Nations Environment Program (UNEP) (2021). *Food Waste Index Report 2021.*](https://www.unep.org/resources/report/unep-food-waste-index-report-2021#:~:text=Estimates%20suggest%20that%208%2D10,both%20people%20and%20the%20planet.)
+
+According to the National Environment Agency (NEA), Singapore generated 763,000 tonnes of food waste in 2022 and this accounted for 11% of total waste. This amount has increased steadily over the years, and it is expected to continue to grow as the population and economy expand. Source: [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Food waste is a serious problem in Singapore, as it affects food security and puts pressure on resources. This is especially concerning given that Singapore imports over 90% of its food supply and is a land-scarce country. Source: [towardszerowaste.gov.sg](https://www.towardszerowaste.gov.sg/foodwaste/#:~:text=When%20food%20is%20wasted%2C%20more,puts%20pressure%20on%20our%20resources.)
+
+**3. Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).**
+
+1.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++---------------+--------------------------------------------+
+| Row           | Column                                     |
++:==============+:===========================================+
+| 1 to 20       | 1.  Country                                |
+|               | 2.  combined figures (kg/capita/year)      |
+|               | 3.  Household estimate (kg/capita/year)    |
+|               | 4.  Household estimate (tonnes/year)       |
+|               | 5.  Retail estimate (kg/capita/year)       |
+|               | 6.  Retail estimate (tonnes/year)          |
+|               | 7.  Food service estimate (kg/capita/year) |
+|               | 8.  Food service estimate (tonnes/year)    |
+|               | 9.  Region                                 |
++---------------+--------------------------------------------+
+
+2.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++---------------+-----------------------------------+
+| Row           | Column                            |
++:==============+:==================================+
+| 1 to 20       | 1.  Year                          |
+|               | 2.  Total Waste Recycled (tonne)  |
+|               | 3.  Total Waste Generated (tonne) |
+|               | 4.  Recycling Rate (%)            |
++---------------+-----------------------------------+
+
+**4. Include the challenges and errors that you faced and how you overcame them.**
+
+1.  Using the data sets obtain from United Nations Environment Programme (UNEP) from Kaggle, I have created a bar chart to show the top 5 countries including Singapore of the total Household Food Waste generated (tonnes per year). Initially, some of challenges I faced and I resolved it in a table below.
+
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Challenge Faced                                                                          | Solution                                                                                                              |
++:=========================================================================================+:======================================================================================================================+
+| How do I flipped the bar chart from vertical to horizontal?                              | Use `coord_flip()`                                                                                                    |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| The data value displayed extended outside the panel and I do not know how to resolve it. | Added `clip = "off"` to coordinate system of `coord_flip()` to ensure that the labels are not truncated by the panel. |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| How do I change the sharp-edged bars into rounded rectangles?                            | Installed a geom_chicklet package and changed from `geom_bar()` to `geom_chicklet( radius = grid::unit(2, 'mm')`      |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+
+2.  Another challenge I faced was to integrate shiny app into Quarto. I resolved it by creating doing the following:
+
+    1.  Installed the "r-shinylive" package from GitHub in R Console
+    2.  Opened my Quarto project using the terminal
+    3.  Installed the "shinylive" Quarto extension via the Terminal in the new RStudio Project.
+    4.  Created a new Quarto document of dashboard.qmd
+    5.  Modified the Quarto document of dashboard.qmd to utilize the "shinylive" filter.
+    6.  Switched the code cell type from \`{r}\` to \`{shinylive-r}\` to execute the Shiny app.
+
+## Week 11
+
+**1. List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)**
+```{=html}
+<style>
+.mb-5 {
+    margin: 5px 0;
+}
+</style>
+<p>In my project, I plan to use the following visualizations to answer my larger research question:</p>
+
+<ul>
+    <li class="mb-5"><strong>Stacked-Bar Chart</strong></li>
+    1. To illustrate the relative proportion of food waste type by region
+    <li class="mb-5"><strong>Bar Chart</strong></li>  
+    1. To illustrate the top and bottom 5 countries including Singapore's total food waste (tonnes per year)  
+    <br>
+    2. To illustrate the top and bottom 5 countries including Singapore's household food waste (tonnes per year)
+    <li class="mb-5"><strong>Choropleth Map</strong></li>
+    1. To illustrate the overview of all the countries on the combined food waste 
+    <br>
+    2. To illustrate the different region of combined food waste
+    <li class="mb-5"><strong>Donut Chart</strong></li>
+    1. To represent the different food waste type Singapore
+    <li class="mb-5"><strong>Line Chart</strong></li>
+    1. To show the trends of food waste generated, disposed, recycled in Singapore
+</ul>
+```
+
+**2. How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)**
+
+```{=html}
+<p>I plan to make my data story interactive by leveraging the features of ggplot2, Shiny, and Quarto. Here's how I intend to use each of these tools:</p>
+
+<ul>
+    <li>Use ggplot2</li>
+    <li>Use plotly</li>
+    <li>Use shiny</li>
+    <li>Quarto</li>
+</ul
+
+<p>In addition, besides creating the data story in index.qmd, I also plan to create a dashboard by integrating Shiny into Quarto, as mentioned in week 10. This dashboard will serve as a central hub for users to access and interact with the data, providing a comprehensive and real-time view of the information presented in the data story.</p>
+```
+
+**3 What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Week</th>
+    <th>Concept</th>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Data Visualisation (<strong><i>ggplot2</i></strong> - Data Aesthetics, layers, Geometries, Labels and Annotations , <strong><i>shiny</strong></i>)</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Data structures (Vectors)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Data Manipulation (Pipelines, Filtering, Ordering and Sorting, Reshaping data, Aggregation, Data Transformation, Data Wrangling)</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Functions (Function call, Scoping)</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Visualising with ggplot2 (Themes Customization)</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Shiny (Reactive Programming, User Interface, Service Logic, Input and Output Controls)</td>
+  </tr>
+  
+  <tr>
+    <td>9</td>
+    <td>Reshaping data</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Coordination System Flipping (coord_flip())<br><br>
+    Highcharter Package<br><br>
+    ShinyDashboard Package (Dashboard Layout)<br><br></td>
+  </tr>
+  
+</table>
+```
+
+<br>
+
+**4. Include the challenges and errors that you faced and how you overcame them.**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Challenge Faced</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Adding the choropleth map to quarto</td>
+    <td>Use highcharter package</td>
+  </tr>
+  <tr>
+    <td>Adding the legend manually</td>
+    <td>Use scale_fill_manual()</td>
+  </tr>
+  <tr>
+    <td>Adding the margin around the bar chart</td>
+    <td>Use margin() in theme()</td>
+  </tr>
+</table>
+<br>
+```
+
+## Week 12
+
+**1. Include the challenges and errors that you faced and how you overcame them.**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Challenge Faced</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Unable to import datasets into Shinylive, which prevents data manipulation.</td>
+    <td>I followed the tutorial from NM2207 Resource on Integrating of Shiny dashboard with Quarto</td>
+  </tr>
+  <tr>
+    <td>Unable to add a sticky navbar using JavaScript on the side in the index.qmd.</td>
+    <td>Remove 'page-layout: custom' from _quarto.yml and delete JavaScript.html.</td>
+  </tr>
+  <tr>
+    <td>The customised button for scrolling to the top in the navigation bar is not working because I deleted 'javascript.html,' where I had stored all the JavaScript.</td>
+    <td>Add 'back-to-top-navigation: true' in _quarot.yml</td>
+  </tr>
+  <tr>
+    <td>I was figuring out how to use a select input to change my bar graph based on the selected region.</td>
+    <td>Use reactive() and renderPlotly() in app.r</td>
+  </tr>
+  <tr>
+    <td>Unable to change the color of the geom_text() to white without it changing to red or pink.</td>
+    <td>set 'colour = "white"' outside the aesthetic mapping, for example, 'geom_text(aes(), colour = "white").'</td>
+  </tr>
+  <tr>
+    <td>Unable to update the display text to 'Household: <value>kg' when hovering over the bar chart representing the sector within the specified region.</td>
+    <td> added the text paste0("Household: ", total_household_estimate_kpcpy, "kg") within the geom_col aesthetics.</td>
+  </tr>
+</table>
+<br>
+```
