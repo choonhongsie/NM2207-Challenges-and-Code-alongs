@@ -1,0 +1,16 @@
+---
+# Hides the sidebar on this page
+sidebar: false
+format:
+  html:
+    grid: 
+      sidebar-width:	0px
+      body-width:	1500px
+      margin-width:	0px
+      gutter-width:	0em
+---
+
+```{=html}
+
+<iframe height="800px" width="100%" frameborder="no" src="https://choonhongnus.shinyapps.io/FoodWasteDashboard/"></iframe>
+```

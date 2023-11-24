@@ -1,0 +1,12 @@
+name: FoodWasteDashboard
+title: FoodWasteDashboard
+username: choonhongnus
+account: choonhongnus
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10604650
+bundleId: 7964197
+url: https://choonhongnus.shinyapps.io/FoodWasteDashboard/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
