@@ -1,0 +1,6 @@
+"0","mean((data$actuals$cases - data$actuals$deaths)/data$actuals$cases)"
+"1","[1]"
+"1"," 0.9896543"
+"1","
+"
+"0","ggplot(data, aes(x=state,y=((data$actuals$cases - data$actuals$deaths)/data$actuals$cases))) + geom_bar(stat=""identity"") + labs(x=""States"",y=""Infected (%)"")+theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust = 1))"

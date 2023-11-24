@@ -1,0 +1,439 @@
+---
+---
+---
+
+## Week 9: Diary Entry
+
+**1. What is the topic that you have finalized? (Answer in 1 or 2 sentences)**
+
+The topic that I have finalized is food waste in Singapore. I will discuss the extent of food waste in Singapore, its causes and impacts, and what can be done to reduce it.
+
+**2. What are the data sources that you have curated so far? (Answer in 1 or 2 sentences)**
+
+1.  [Average Food Waste Around the World, 2021](https://www.kaggle.com/datasets/joebeachcapital/food-waste/)
+
+2.  [Waste and Recycling Statistics from 2003 to 2017](https://www.nea.gov.sg/docs/default-source/our-services/waste-management/wastestats-2003-20164197a3fd04d34770bafba09393d0fdf0.pdf)
+
+3.  [Waste and Recycling Statistics from 2017 to 2021](https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf)
+
+4.  [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Link to Github: Challenges & Code-alongs:\
+<https://github.com/choonhongsie/NM2207-Challenges-and-Code-alongs.git>
+
+Webpage:\
+<https://choonhongsie.github.io>
+
+## Week 10: Diary Entry
+
+**1. What is the question that you are going to answer? (Answer: One sentence that ends with a question mark that could act like the title of your data story)**
+
+What are the key drivers of food waste in Singapore and around the world?
+
+**2. Why is this an important question? (Answer: 3 sentences, each of which has some evidence, e.g., "According to the United Nations..." to justify why the question you have chosen is important)**
+
+Food waste is a major contributor to climate change, accounting for 8-10% of global greenhouse gas emissions. Reducing food waste is essential for mitigating climate change and protecting the environment. Source: [United Nations Environment Program (UNEP) (2021). *Food Waste Index Report 2021.*](https://www.unep.org/resources/report/unep-food-waste-index-report-2021#:~:text=Estimates%20suggest%20that%208%2D10,both%20people%20and%20the%20planet.)
+
+According to the National Environment Agency (NEA), Singapore generated 763,000 tonnes of food waste in 2022 and this accounted for 11% of total waste. This amount has increased steadily over the years, and it is expected to continue to grow as the population and economy expand. Source: [2022 Waste Statistics and Overall Recycling Table](https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling)
+
+Food waste is a serious problem in Singapore, as it affects food security and puts pressure on resources. This is especially concerning given that Singapore imports over 90% of its food supply and is a land-scarce country. Source: [towardszerowaste.gov.sg](https://www.towardszerowaste.gov.sg/foodwaste/#:~:text=When%20food%20is%20wasted%2C%20more,puts%20pressure%20on%20our%20resources.)
+
+**3. Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).**
+
+1.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++---------------+--------------------------------------------+
+| Row           | Column                                     |
++:==============+:===========================================+
+| 1 to 20       | 1.  Country                                |
+|               | 2.  combined figures (kg/capita/year)      |
+|               | 3.  Household estimate (kg/capita/year)    |
+|               | 4.  Household estimate (tonnes/year)       |
+|               | 5.  Retail estimate (kg/capita/year)       |
+|               | 6.  Retail estimate (tonnes/year)          |
+|               | 7.  Food service estimate (kg/capita/year) |
+|               | 8.  Food service estimate (tonnes/year)    |
+|               | 9.  Region                                 |
++---------------+--------------------------------------------+
+
+2.  **Dataset: Waste and Recycling Statistics from 2003 to 2022**
+
++---------------+-----------------------------------+
+| Row           | Column                            |
++:==============+:==================================+
+| 1 to 20       | 1.  Year                          |
+|               | 2.  Total Waste Recycled (tonne)  |
+|               | 3.  Total Waste Generated (tonne) |
+|               | 4.  Recycling Rate (%)            |
++---------------+-----------------------------------+
+
+**4. Include the challenges and errors that you faced and how you overcame them.**
+
+1.  Using the data sets obtain from United Nations Environment Programme (UNEP) from Kaggle, I have created a bar chart to show the top 5 countries including Singapore of the total Household Food Waste generated (tonnes per year). Initially, some of challenges I faced and I resolved it in a table below.
+
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| Challenge Faced                                                                          | Solution                                                                                                              |
++:=========================================================================================+:======================================================================================================================+
+| How do I flipped the bar chart from vertical to horizontal?                              | Use `coord_flip()`                                                                                                    |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| The data value displayed extended outside the panel and I do not know how to resolve it. | Added `clip = "off"` to coordinate system of `coord_flip()` to ensure that the labels are not truncated by the panel. |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+| How do I change the sharp-edged bars into rounded rectangles?                            | Installed a geom_chicklet package and changed from `geom_bar()` to `geom_chicklet( radius = grid::unit(2, 'mm')`      |
++------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
+
+2.  Another challenge I faced was to integrate shiny app into Quarto. I resolved it by creating doing the following:
+
+    1.  Installed the "r-shinylive" package from GitHub in R Console
+    2.  Opened my Quarto project using the terminal
+    3.  Installed the "shinylive" Quarto extension via the Terminal in the new RStudio Project.
+    4.  Created a new Quarto document of dashboard.qmd
+    5.  Modified the Quarto document of dashboard.qmd to utilize the "shinylive" filter.
+    6.  Switched the code cell type from \`{r}\` to \`{shinylive-r}\` to execute the Shiny app.
+
+## Week 11
+
+**1. List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)**
+
+```{=html}
+<style>
+.mb-5 {
+    margin: 5px 0;
+}
+</style>
+<p>In my project, I plan to use the following visualizations to answer my larger research question:</p>
+
+<ul>
+    <li class="mb-5"><strong>Stacked-Bar Chart</strong></li>
+    1. To illustrate the relative proportion of food waste type by region
+    <li class="mb-5"><strong>Bar Chart</strong></li>  
+    1. To illustrate the top and bottom 5 countries including Singapore's total food waste (tonnes per year)  
+    <br>
+    2. To illustrate the top and bottom 5 countries including Singapore's household food waste (tonnes per year)
+    <li class="mb-5"><strong>Choropleth Map</strong></li>
+    1. To illustrate the overview of all the countries on the combined food waste 
+    <br>
+    2. To illustrate the different region of combined food waste
+    <li class="mb-5"><strong>Donut Chart</strong></li>
+    1. To represent the different food waste type Singapore
+    <li class="mb-5"><strong>Line Chart</strong></li>
+    1. To show the trends of food waste generated, disposed, recycled in Singapore
+</ul>
+```
+**2. How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)**
+
+```{=html}
+<p>I plan to make my data story interactive by leveraging the features of ggplot2, Shiny, and Quarto. Here's how I intend to use each of these tools:</p>
+
+<ul>
+    <li>Use ggplot2</li>
+    <li>Use plotly</li>
+    <li>Use shiny</li>
+    <li>Quarto</li>
+</ul
+
+<p>In addition, besides creating the data story in index.qmd, I also plan to create a dashboard by integrating Shiny into Quarto, as mentioned in week 10. This dashboard will serve as a central hub for users to access and interact with the data, providing a comprehensive and real-time view of the information presented in the data story.</p>
+```
+**3 What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Week</th>
+    <th>Concept</th>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Data Visualisation (<strong><i>ggplot2</i></strong> - Data Aesthetics, layers, Geometries, Labels and Annotations , <strong><i>shiny</strong></i>)</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Data structures (Vectors)</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Data Manipulation (Pipelines, Filtering, Ordering and Sorting, Reshaping data, Aggregation, Data Transformation, Data Wrangling)</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Functions (Function call, Scoping)</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Visualising with ggplot2 (Themes Customization)</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Shiny (Reactive Programming, User Interface, Service Logic, Input and Output Controls)</td>
+  </tr>
+  
+  <tr>
+    <td>9</td>
+    <td>Reshaping data</td>
+  </tr>
+  <tr>
+    <td>Self-Learnt</td>
+    <td>Coordination System Flipping (coord_flip())<br><br>
+    Highcharter Package<br><br>
+    ShinyDashboard Package (Dashboard Layout)<br><br></td>
+  </tr>
+  
+</table>
+```
+<br>
+
+**4. Include the challenges and errors that you faced and how you overcame them.**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Challenge Faced</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Adding the choropleth map to quarto</td>
+    <td>Use highcharter package</td>
+  </tr>
+  <tr>
+    <td>Adding the legend manually</td>
+    <td>Use scale_fill_manual()</td>
+  </tr>
+  <tr>
+    <td>Adding the margin around the bar chart</td>
+    <td>Use margin() in theme()</td>
+  </tr>
+</table>
+<br>
+```
+## Week 12
+
+**1. Include the challenges and errors that you faced and how you overcame them.**
+
+```{=html}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table>
+  <tr>
+    <th>Challenge Faced</th>
+    <th>Solution</th>
+  </tr>
+  <tr>
+    <td>Unable to import datasets into Shinylive, which prevents data manipulation.</td>
+    <td>I followed the tutorial from NM2207 Resource on Integrating of Shiny dashboard with Quarto</td>
+  </tr>
+  <tr>
+    <td>Unable to add a sticky navbar using JavaScript on the side in the index.qmd.</td>
+    <td>Remove 'page-layout: custom' from _quarto.yml and delete JavaScript.html.</td>
+  </tr>
+  <tr>
+    <td>The customised button for scrolling to the top in the navigation bar is not working because I deleted 'javascript.html,' where I had stored all the JavaScript.</td>
+    <td>Add 'back-to-top-navigation: true' in _quarot.yml</td>
+  </tr>
+  <tr>
+    <td>I was figuring out how to use a select input to change my bar graph based on the selected region.</td>
+    <td>Use reactive() and renderPlotly() in app.r</td>
+  </tr>
+  <tr>
+    <td>Unable to change the colour of the geom_text() to white without it changing to red or pink.</td>
+    <td>set 'colour = "white"' outside the aesthetic mapping, for example, 'geom_text(aes(), colour = "white").'</td>
+  </tr>
+  <tr>
+    <td>Unable to update the display text to 'Household: <value>kg' when hovering over the bar chart representing the sector within the specified region.</td>
+    <td> added the text paste0("Household: ", total_household_estimate_kpcpy, "kg") within the geom_col aesthetics.</td>
+  </tr>
+</table>
+<br>
+```
+## Week 13
+
+**Which rows and columns of the dataset will be used to answer this question? (Answer: Actual names of the variables in the dataset that you plan to use).**
+
+1.  **Dataset: Waste and Recycling Statistics for 2022**
+
++---------------+-----------------------------------+
+| Row           | Column                            |
++:==============+:==================================+
+| 1 to 15       | 1.  Waste Type                    |
+|               | 2.  Total Generated ('000 tonnes) |
++---------------+-----------------------------------+
+
+**List the visualizations that you are going to use in your project (Answer: What are the variables that you are going to plot? How will it answer your larger question?)**
+
+In addition, the mentioned in week 11 dairy entry, I utilised Treemap to show a detailed breakdown of different waste type.
+
+**How do you plan to make it interactive? (Answer: features of ggplot2/shiny/markdown do you plan to use to make the story interactive)**
+
+In addition to make my data story interactive by leveraging the features of ggplot2, Shiny, and Quarto mentioned in week 11 dairy entry. I utilised Bootstrap to display tooltip for user to navigate to the Dashboard and hide content. Additionally, I employed highcharter to create the interactive charts, including Choropleth Map and Treemap.
+
+**What concepts incorporated in your project were taught in the course and which ones were self-learnt? (Answer: Create a table with topics in one column and Weeks in the other to indicate which concept taught in which week is being used. Leave the entry of the Week column empty for self-learnt concepts)**
+
++-------------+------------------------------------------------------------------------------------------------------+
+| Week        | Concept                                                                                              |
++:============+:=====================================================================================================+
+| Self-Learnt | 1.  Tooltip using jQuery to decrease the delay time of displaying the tooltip                        |
+|             | 2.  ShinyDashboard package                                                                           |
+|             |     -   Utilises `conditionalPanel` for dynamic content based on conditions.                         |
+|             | 3.  plotly package                                                                                   |
+|             |     -   Enables interactive data visualisations in R.                                                |
+|             | 4.  randomColor package                                                                              |
+|             |     -   Generates random colours for Treemap visualization on the Dashboard.                         |
+|             | 5.  Bootstrap 5                                                                                      |
+|             |     -   Accordion for references and data sources                                                    |
+|             |                                                                                                      |
+|             |     -   Tooltip                                                                                      |
+|             |                                                                                                      |
+|             |     -   Collapse to hide the content to create a more interactivity                                  |
+|             |                                                                                                      |
+|             |     -   Tabs to display different charts                                                             |
+|             | 6.  shinyapp.io to host Shiny applications.                                                          |
+|             | 7.  Formatting of Numerical Data                                                                     |
+|             |     -   Utilises `format()` with `big.mark = ","` and `scientific = FALSE` to format numerical data. |
+|             |                                                                                                      |
+|             |     -   `scales::comma()` to format numerical data                                                   |
+|             | 8.  Combines data frames row-wise                                                                    |
+|             |     -   bind_rows                                                                                    |
+|             | 9.  Download image from charts                                                                       |
+|             |     -   `hc_exporting()`                                                                             |
++-------------+------------------------------------------------------------------------------------------------------+
+
+## Final Submission
+
+**Answer the following questions**
+
+(1) **What is the theme of your data story?**
+(2) **Why is it important to address this question?**
+(3) **Why do you think the data sources that you have curated can help you answer the question?**
+(4) **What are the insights from the data and how are they depicted in plots?**
+(5) **How did you implement this entire project? Were there any new concepts that you learnt to implement some aspects of it?**
+
+```{=html}
+<style>
+  .hanging-indent {
+  text-indent: 30px; 
+}
+
+.hanging-indent p {
+  margin: 0; 
+  padding-left: 30px; 
+  text-indent: -30px; 
+}
+.fully-justified-line-spacing {
+  text-align: justify;
+}
+
+.fully-justified-line-spacing p {
+  margin: 0;
+  line-height: 1.5; 
+}
+.first-line-indent p {
+  text-indent: 20px; 
+}
+
+</style>
+<section class = "fully-justified-line-spacing first-line-indent">
+<p>The theme of this data story revolves around the pervasive issue of food waste around the world and in Singapore. This investigation delves into the extent of food waste, its underlying causes and impacts, and proposes viable strategies for mitigation. This essay will explore the importance of addressing the key question of the drivers of food waste, the relevance of curated data sources, insights derived from the data, the implementation of the project, and the concepts learned throughout its development.</p><br>
+
+<p>Understanding the drivers behind food waste is imperative due to its substantial contribution to global greenhouse gas emissions, estimated at 8-10%, intensifying climate change (UNEP, 2021). In Singapore, where food waste comprised 11% (763,000 tonnes) of total waste in 2022 (NEA, 2022), this issue poses a significant threat to environmental sustainability amid the country's ongoing population and economic growth. Additionally, given Singapore's heavy reliance on food imports (over 90%) due to limited land resources, addressing food waste is critical for enhancing resource efficiency and ensuring food security. This problem necessitates urgent attention and innovative strategies to promote sustainability and mitigate environmental impact.</p><br>
+
+<p>The curated datasets present valuable resources for understanding the determinants of food waste both in Singapore and globally. The dataset from Kaggle titled "Food Waste" is from the UNEP Food Waste Index Report 2021 and encompasses a comprehensive collection of data points specifically focused on food waste, providing insights into various contributing factors, such as which food waste sector generates the most food waste and which countries and regions contribute the most to food waste. Additionally, the reports published by the National Environment Agency (NEA) offer extensive information covering waste management, statistics spanning from 2003 to 2022, and detailed breakdowns of waste and recycling trends. These datasets collectively offer a broad spectrum of information, including regional variations, household estimates, and broader trends, enabling a comprehensive analysis of the key drivers behind food waste in both Singapore and worldwide contexts.</p><br>
+
+<p>The data provides a clear picture of the key contributors to food waste globally. It highlights households as the leading source, accounting for a significant 61.1% of total waste, followed by food services (26.2%) and retail establishments (12.7%). Moreover, it reveals staggering figures from populous countries like China and India, which collectively contribute nearly one-third of the world's household food waste. Interestingly, the distribution of food waste across different regions presents a compelling narrative. Countries in Sub-Saharan Africa and Western Asia, known for lower levels of economic development, rank high in food waste generation. Conversely, highly developed Western European nations exhibit lower per capita food waste. In Singapore, while it ranks relatively lower in food waste generation among Southeast Asian countries, it still faces imminent challenges. Despite its current standing, factors like the expected filling of Pulau Semakau by 2035 (MSE, 2020) due to waste and the environmental impact of methane production from food waste necessitate urgent attention. In essence, the insights derived from this data underscore a global issue demanding collective action. Even if some regions fare better than others, the looming environmental consequences and resource exhaustion compel a unified effort to mitigate food waste across the board.</p><br>
+
+<p>The implementation of the project was comprehensive, encompassing various stages from data curation to visualisation and analysis. A significant hurdle involved integrating Shiny apps into Quarto, necessitating the installation of the "r-shinylive" package and the "shinylive" Quarto extension. These were entirely new concepts that I had to grasp, navigating through challenges using online resources and self-learning. Encountering obstacles in incorporating datasets into Shinylive led me to follow a tutorial from NM2207 Resource on Integrating Shiny Dashboard with Quarto, which successfully guided me through the issue.
+
+Another challenge emerged when attempting to incorporate download button and downloadHandler() components from Shiny. Despite researching extensively, I encountered difficulty in converting the chart from highcharter to an image format like PNG. However, my search for alternatives led me to discover and successfully implement 'hc_exporting()', resolving this particular challenge. 
+
+Throughout the project, I applied concepts learned in the course, particularly those related to data visualisation using ggplot2 and effective dataset manipulation for insightful outcomes. Self-learning played a pivotal role, especially when incorporating a Shiny application widget into the charts. Additionally, to enhance the visual appeal of the charts, legends and margins need to be manually positioned. Furthermore, tweaking the colour of the geom_text() to white without unintended changes to red or pink presented a challenge. To resolve this, I set 'colour = "white"' outside the aesthetic mapping, ensuring the desired visual outcome without compromising unintentional colour changes. Overall, the project implementation involved a fusion of learned concepts, self-learning endeavors, and creative problem-solving to overcome various challenges encountered along the way.</p><br>
+
+<p>In conclusion, the exploration of food waste issues globally and specifically in Singapore sheds light on the urgency of addressing this pervasive problem. The investigation highlighted the substantial environmental impact of food waste, underlining its significant contribution to greenhouse gas emissions and the looming threat to Singapore's sustainability amidst population and economic growth. The curated datasets from UNEP and NEA provided crucial insights into the drivers of food waste, revealing stark statistics on household, food service, and retail waste contributions, both globally and regionally. Despite certain regions faring better than others, the overarching message remains clear: the collective effort is crucial to mitigate this global issue. The implementation process itself, marked by various challenges and learning curves, showcased a fusion of acquired knowledge, self-learning initiatives, and innovative problem-solving. As we navigate through these challenges, it is evident that a concerted effort, incorporating data-driven strategies and innovative solutions, is imperative to combat food waste and promote a sustainable future.</p><br>
+
+<p>Word Count: <strong>933</strong></p>
+</section>
+
+<section class="hanging-indent">
+  <h1 style="text-align: center;">References</h1>
+  <p>Arvidsson, J. (n.d.). Food Waste [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/joebeachcapital/food-waste" target="_blank">https://www.kaggle.com/datasets/joebeachcapital/food-waste</a></p>
+
+<p>Food and Agriculture Organization of the United Nations (FAO). 2011. Global food losses and food waste – Extent, causes and prevention. Rome. <a href="https://www.fao.org/3/mb060e/mb060e00.htm" target="_blank">https://www.fao.org/3/mb060e/mb060e00.htm</a></p>
+
+<p>Lee, H.W. (2022, January 3).Food Wastage Statistics in Singapore. <a href="https://www.bestinsingapore.co/food-wastage-statistics-singapore/" target="_blank">https://www.bestinsingapore.co/food-wastage-statistics-singapore/</a></p>
+
+<p>Low, Y.J. (2019, August 6). Every Singaporean household throws away an average S$258 worth of food a year: Study. <a href="https://www.todayonline.com/singapore/every-singaporean-household-throws-away-average-s258-worth-food-year-study" target="_blank">https://www.todayonline.com/singapore/every-singaporean-household-throws-away-average-s258-worth-food-year-study</a></p>
+
+<p>Ministry of Sustainability and the Environment (MSE). (2020, January 14). Saving Semakau — One island’s role in managing Singapore’s waste. <a href="https://www.mse.gov.sg/resource-room/category/2020-01-14-newsletter-saving-semakau-one-island-role-in-manaing-singapore-waste/" target="_blank">https://www.mse.gov.sg/resource-room/category/2020-01-14-newsletter-saving-semakau-one-island-role-in-manaing-singapore-waste/</a></p>
+
+<p>Miquelis, P. (2019, january 25). The Truth About Food Waste in Singapore (and beyond). <a href="https://greenisthenewblack.com/the-truth-about-food-waste-in-singapore-and-beyond/" target="_blank">https://greenisthenewblack.com/the-truth-about-food-waste-in-singapore-and-beyond/</a></p>
+
+<p>National Environment Agency (NEA). (n.d.). Waste Statistics and Recycling Rate from 2017 to 2021 [Data set]. <a href="https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf" target="_blank">https://www.nea.gov.sg/docs/default-source/default-document-library/waste-and-recycling-statistics-2017-to-2021.pdf</a></p>
+
+<p>National Environment Agency (NEA). (n.d.). Waste Statistics and Recycling Rate from 2003 to 2016 [Data set]. <a href="https://www.nea.gov.sg/docs/default-source/our-services/waste-management/wastestats-2003-20164197a3fd04d34770bafba09393d0fdf0.pdf" target="_blank">https://www.nea.gov.sg/docs/default-source/our-services/waste-management/wastestats-2003-20164197a3fd04d34770bafba09393d0fdf0.pdf</a></p>
+
+<p>National Environment Agency (NEA). (n.d.). Waste Statistics and Recycling Rate for 2022 [Data set]. <a href="https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling" target="_blank">https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling</a></p>
+
+<p>National Environment Agency (NEA). (n.d.). Waste Statistics and Overall Recycling
+.<a href="https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling" target="_blank">https://www.nea.gov.sg/our-services/waste-management/waste-statistics-and-overall-recycling</a></p>
+
+<p>O'Neill, A. (2023, February 2).Gross domestic product (GDP) per capita in selected global regions at current prices in 2021. <a href="https://www.statista.com/statistics/256413/gross-domestic-product-per-capita-in-selected-global-regions/">https://www.statista.com/statistics/256413/gross-domestic-product-per-capita-in-selected-global-regions/</a></p>
+
+<p>Selassie, A. A., & Hakobyan, S. (2021, April 15). Six charts show the challenges faced by Sub-Saharan Africa. International Monetary Fund (IMF). <a href="https://www.imf.org/en/News/Articles/2021/04/12/na041521-six-charts-show-the-challenges-faced-by-sub-saharan-africa">https://www.imf.org/en/News/Articles/2021/04/12/</a></p>
+
+<p>Towards Zero Waste. (n.d.). Food Waste. <a href="https://www.towardszerowaste.gov.sg/foodwaste/">https://www.towardszerowaste.gov.sg/foodwaste/</a></p>
+
+<p>United Nation Environment Programme. (2022, September 26). Why the global fight to tackle food waste has only just begun. <a href="https://www.unep.org/news-and-stories/story/why-global-fight-tackle-food-waste-has-only-just-begun" target="_blank">https://www.unep.org/news-and-stories/story/why-global-fight-tackle-food-waste-has-only-just-begun</a></p>
+
+<p>Zheng, Z. (2019, May 16). Food waste worsens climate change more than plastics: Zero waste Scotland report. <a href="https://mothership.sg/2019/05/food-waste-worsens-climate-change-more- than-plastics-zero-waste-scotland-report/" target="_blank">https://mothership.sg/2019/05/food-waste-worsens-climate-change-more- than-plastics-zero-waste-scotland-report/</a>
+</p>
+
+</section>
+```

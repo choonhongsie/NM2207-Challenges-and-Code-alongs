@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Challenge-11",
+    "section": "",
+    "text": "i. What is the population in various states of U.S.A?\n\n\n [1] \"AK\" \"AL\" \"AR\" \"AZ\" \"CA\" \"CO\" \"CT\" \"DC\" \"DE\" \"FL\" \"GA\" \"HI\" \"IA\" \"ID\" \"IL\"\n[16] \"IN\" \"KS\" \"KY\" \"LA\" \"MA\" \"MD\" \"ME\" \"MI\" \"MN\" \"MO\" \"MP\" \"MS\" \"MT\" \"NC\" \"ND\"\n[31] \"NE\" \"NH\" \"NJ\" \"NM\" \"NV\" \"NY\" \"OH\" \"OK\" \"OR\" \"PA\" \"PR\" \"RI\" \"SC\" \"SD\" \"TN\"\n[46] \"TX\" \"UT\" \"VA\" \"VT\" \"WA\" \"WI\" \"WV\" \"WY\"\n\n\n [1]   731545  4903185  3017804  7278717 39512223  5758736  3565287   705749\n [9]   973764 21477737 10617423  1415872  3155070  1787065 12671821  6732219\n[17]  2913314  4467673  4648794  6892503  6045680  1344212  9986857  5639632\n[25]  6137428    53605  2976149  1068778 10488084   762062  1934408  1359711\n[33]  8882190  2096829  3080156 19453561 11689100  3956971  4217737 12801989\n[41]  3193694  1059361  5148714   884659  6829174 28995881  3205958  8535519\n[49]   623989  7614893  5822434  1792147   578759\n\n\n\n\n\n\n\nii. What fraction of the population was infected ?\n\n\n\n\n\n\n\niii. What fraction of infected persons recovered ?\n\n\n\n\n\n\n\niv. What fraction of the population is currently vaccinated ?\n\n\n\n\n\n\n\nv. What was the transmission-like in the various states ?\n\n\n\n\n\n\n\nvi. How did the disease progress since it started ?"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
